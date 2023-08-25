@@ -23,7 +23,7 @@ The command to run the script is:
 
 `./LM317_calculator.py` *target_voltage*
 
-The output will be the base values of the fixed resistors R1, R2 that should be used
+The output will be the base values of the fixed resistors R1, R2 that should be used,
 along with the actual output voltage that will be produced.
 
 R1 should be in the order of magnitude in the range of 1K or less, so apply an appropriate
