@@ -27,4 +27,4 @@ The output will be the base values of the resistors R1, R2 that should be used, 
 actual output voltage that will be produced.
 
 R1 should be in the order of magnitude in the range of 1K or less, so apply an appropriate
-multiplier to the output values.
+multiplier (probably 100) to the output values.
