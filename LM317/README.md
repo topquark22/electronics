@@ -7,7 +7,7 @@ but here we only discuss its use as a voltage regulator.
 
 ![LM317 TO-220](LM317.jpg)
 
-In its most basic configuration as a voltage regulator, the LM317 is wired like this:
+In its most basic configuration, the LM317 is wired like this:
 
 ![LM317 simple voltage regulator](LM317-basic.jpg)
 
