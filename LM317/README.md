@@ -13,7 +13,7 @@ In its most basic configuration, the LM317 is wired like this:
 
 The output voltage is given by the formula:
 
-== V = 1.25 * (1 + R2 / R1) ==
+**V = 1.25 * (1 + R2 / R1)**
 
 ## Functionality
 
