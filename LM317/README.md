@@ -11,9 +11,7 @@ In its most basic configuration, the LM317 is wired like this:
 
 ![LM317 simple voltage regulator](LM317-basic.jpg)
 
-The output voltage is given by the formula:
-
-**V = 1.25 * (1 + R2 / R1)**
+The output voltage is given by the formula: **V = 1.25 * (1 + R2 / R1)**
 
 ## Functionality
 
