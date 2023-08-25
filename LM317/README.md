@@ -13,7 +13,7 @@ In its most basic configuration, the LM317 is wired like this:
 
 The output voltage is given by the formula: **V = 1.25 * (1 + R2 / R1)**
 
-## Functionality
+## Usage
 
 This Python script is prepopulated with a list of common resistor values, known in the industry
 as E12. You may wish to edit the list to include any resistor values that are available to you,
