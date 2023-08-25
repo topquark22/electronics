@@ -2,8 +2,7 @@
 
 ## Overview
 
-The LM317 is a versatile adjustable voltage regulator. (It can also be used as a current source,
-but here we only discuss its use as a voltage regulator.)
+The LM317 is a versatile adjustable voltage regulator.
 
 ![LM317 TO-220](LM317.jpg)
 
