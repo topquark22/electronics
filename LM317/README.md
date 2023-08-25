@@ -5,8 +5,6 @@
 The LM317 is a versatile adjustable voltage regulator. It can also be used as a current source,
 but here we only discuss its use as a voltage regulator.
 
-Here it is in the TO-220 package:
-
 ![LM317 TO-220](LM317.jpg)
 
 In its most basic configuration as a voltage regulator, the LM317 is wired like this:
