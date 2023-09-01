@@ -10,7 +10,9 @@ In its most basic configuration, the LM317 is wired like this:
 
 ![LM317 simple voltage regulator](LM317-basic.jpg)
 
-The output voltage is given by the formula: **V = 1.25 * (1 + R2 / R1)**
+The output voltage is given by the formula: **V_out = 1.25 * (1 + R2 / R1)**
+
+The minimum differential is 3 volts between the input and the output. Therefore you must have **V_in >= V_out + 3**.
 
 ## Script usage
 
@@ -22,8 +24,4 @@ The command to run the script is:
 
 `./LM317_calculator.py` *target_voltage*
 
-The output will be the base values of the fixed resistors R1, R2 that should be used,
-along with the actual output voltage that will be produced.
-
-R1 should be in the order of magnitude in the range of 1K or less, so apply an appropriate
-multiplier to the output values.
+The output will be the base values of the fixed resistors R1, R2 that should be used, along with the actual output voltage that will be produced. Apply an appropriate multiplier to keep R1 in the range 120 <= R1 <= 1000/
