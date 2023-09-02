@@ -14,6 +14,8 @@ The output voltage is given by the formula: **V_out = 1.25 * (1 + R2 / R1)**
 
 The minimum differential is 3 volts between the input and the output. Therefore you must have **V_in >= V_out + 3**.
 
+The LM317 has no maximum input voltage. However, the difference between the input and output voltage should not exceed 40V. There is a high-voltage version, the LM317HV, which allows an in-out voltage difference of up to 60V.
+
 ## Script usage
 
 The script is prepopulated with a list of common resistor values, known in the industry
