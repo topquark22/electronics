@@ -26,4 +26,6 @@ The command to run the script is:
 
 `./LM317_calculator.py` *target_voltage*
 
-The output will be the base values of the fixed resistors R1, R2 that should be used, along with the actual output voltage that will be produced. Apply an appropriate multiplier to keep R1 in the range 120 <= R1 <= 1000/
+The output will be the values of the fixed resistors R1, R2 that should be used,along with the actual output voltage that will be produced.
+
+You should have $$R1 >= 120$$. If this is not the case, you will get a warning.

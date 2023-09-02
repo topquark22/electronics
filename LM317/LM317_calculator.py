@@ -37,9 +37,12 @@ for R1 in E12_plus:
             closest_value = v
             closest_pair = (R1, R2)
 
-R1 = closest_pair[0]
-R2 = closest_pair[1]
+R1 = round(closest_pair[0] * 100)
+R2 = round(closest_pair[1] * 100)
 
 print(f"Target voltage: {v_target}")
 print(f"Best resistor values: R1={R1}, R2={R2}")
 print(f"Expected voltage: {round(closest_value, 2)}")
+
+if R1 < 120:
+    print("Warning: R1 < 120")
