@@ -14,6 +14,8 @@ The output voltage is given by the formula: **V_out = 1.25 * (1 + R2 / R1)**
 
 The minimum differential is 3 volts between the input and the output. Therefore you must have **V_in >= V_out + 3**.
 
+The minimum value of R1 is 120.
+
 The LM317 has no maximum input voltage. However, the difference between the input and output voltage should not exceed 40V. There is a high-voltage version, the LM317HV, which allows an in-out voltage difference of up to 60V.
 
 ## Script usage
@@ -28,4 +30,4 @@ The command to run the script is:
 
 The output will be the values of the fixed resistors R1, R2 that should be used,along with the actual output voltage that will be produced.
 
-You should have $$R1 >= 120$$. If this is not the case, you will get a warning.
+The current resistor list gives accurate results up to V_out = 72. If you need higher voltage, edit the resistor list in the script.
