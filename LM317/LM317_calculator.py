@@ -30,8 +30,8 @@ def V(R1, R2) :
 closest_value = float('inf')
 closest_pair = (None, None)
 
-for R1 in E12_plus:
-    for R2 in E12_plus:
+for R1 in E12_ext:
+    for R2 in E12_ext:
         v = V(R1, R2)
         if abs(v - v_target) < abs(closest_value - v_target) :
             closest_value = v
