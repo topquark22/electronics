@@ -33,6 +33,6 @@ The command to run the script is:
 
 The output will be the values of the fixed resistors R1, R2 that should be used,along with the actual output voltage that will be produced.
 
-The current resistor list gives accurate results up to V_out = 72. If you need higher voltage, edit the resistor list in the script.
-
 ![sample invocation](sample-run.png)
+
+The resistor list in the script allows for accurate results up to V_out = 72. If you need higher voltage, edit the resistor list.
