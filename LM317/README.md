@@ -35,4 +35,4 @@ The output will be the values of the fixed resistors R1, R2 that should be used,
 
 The current resistor list gives accurate results up to V_out = 72. If you need higher voltage, edit the resistor list in the script.
 
-![sample invocation](LM317-run.png)
+![sample invocation](sample-run.png)
