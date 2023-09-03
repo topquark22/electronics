@@ -11,12 +11,20 @@
 import sys
 import resistor as rs
 
-if (2 != len(sys.argv)) :
-    print(f"Usage: {sys.argv[0]} [target voltage]")
+if len(sys.argv) < 2 or len(sys.argv) > 3:
+    print(f"Usage: {sys.argv[0]} target_voltage [tolerance%]")
     sys.exit()
 
 # Target voltage for LM317 regulator output, from command line
 v_target = float(sys.argv[1])
+
+# assume metal-film resistor
+tolerance_pct = 1
+if len(sys.argv) == 3:
+    tolerance_pct = float(sys.argv[2])
+
+# change to 60 if using the LM370HV
+v_max_diff = 40
 
 # resistor values available (mantissa)
 E12 = [1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 10]
@@ -38,12 +46,30 @@ for R1 in E12_ext:
             closest_value = v
             closest_pair = (R1, R2)
 
+# from https://stackoverflow.com/questions/31818050/round-number-to-nearest-integer
+def proper_round(num, dec=0):
+    num = str(num)[:str(num).index('.')+dec+2]
+    if num[-1]>='5':
+        return float(num[:-2-(not dec)] + str(int(num[-2-(not dec)])+1))
+    return float(num[:-1])
+
+
 R1 = round(closest_pair[0] * 100)
 R2 = round(closest_pair[1] * 100)
 
-print(f"Target voltage: {v_target}")
+if tolerance_pct <= 1:
+    v_out = proper_round(closest_value, 2)
+elif tolerance_pct <= 10:
+   v_out = proper_round(closest_value, 1)
+else:
+  v_out = proper_round(closest_value)
+
+v_in_max = round(v_out + v_max_diff);
+
 print(f"Best resistor values: R1={rs.res_format(R1)}, R2={rs.res_format(R2)}")
-print(f"Expected voltage: {round(closest_value, 2)}")
 
 if R1 < 120:
     print("Warning: R1 < 120")
+
+print(f"Output voltage: {v_out}V")
+print(f"Maximum input voltage: {v_in_max}V")
