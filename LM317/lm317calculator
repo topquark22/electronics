@@ -58,9 +58,7 @@ R1 = round(closest_pair[0] * 100)
 R2 = round(closest_pair[1] * 100)
 
 if tolerance_pct <= 1:
-    v_out = proper_round(closest_value, 2)
-elif tolerance_pct <= 10:
-   v_out = proper_round(closest_value, 1)
+    v_out = proper_round(closest_value, 1)
 else:
   v_out = proper_round(closest_value)
 
