@@ -21,6 +21,10 @@ The minimum value of R1 is 120 ohms. A typical value found in many examples is 2
 
 V_in must be at least 3 volts greater than V_out. There is no maximum input voltage; however, the difference between the input and output voltage must not exceed 40V. (There is a high-voltage version, the LM317HV, which allows a differential of up to 60V.)
 
+## Software requirements
+
+You must have Python 3.6 or greater.
+
 ## Script usage
 
 The script is prepopulated with a list of common resistor values, known in the industry
@@ -29,7 +33,7 @@ but be aware of cost and production feasibility considerations.
 
 The command to run the script is:
 
-`./LM317_calculator.py` *target_voltage*
+`./lm317calculator` *target_voltage*
 
 The output will be the values of the fixed resistors R1, R2 that should be used,along with the actual output voltage that will be produced.
 
