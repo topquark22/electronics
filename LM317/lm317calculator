@@ -59,4 +59,5 @@ if R1 < 120:
     print("Warning: R1 < 120")
 
 print(f"Output voltage: {v_out}V")
+print(f"Minimum input voltage: {v_out + 3}V")
 print(f"Maximum input voltage: {v_in_max}V")
