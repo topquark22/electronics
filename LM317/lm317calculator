@@ -52,7 +52,7 @@ R2 = round(closest_pair[1] * 100)
 v_out = round(closest_value, 1)
 
 v_in_min = v_out + 3
-v_in_max = v_in_min + v_max_diff;
+v_in_max = v_out + v_max_diff;
 
 print(f"Best resistor values: R1={rs.res_format(R1)}, R2={rs.res_format(R2)}")
 
