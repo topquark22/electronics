@@ -51,7 +51,8 @@ R2 = round(closest_pair[1] * 100)
 
 v_out = round(closest_value, 1)
 
-v_in_max = v_out + v_max_diff;
+v_in_min = v_out + 3
+v_in_max = v_in_min + v_max_diff;
 
 print(f"Best resistor values: R1={rs.res_format(R1)}, R2={rs.res_format(R2)}")
 
@@ -59,6 +60,6 @@ if R1 < 120:
     print("Warning: R1 < 120")
 
 print(f"Output voltage: {v_out}V")
-print(f"Minimum input voltage: {v_out + 3}V")
+print(f"Minimum input voltage: {v_in_min}V")
 print(f"Maximum input voltage: {v_in_max}V")
 print(f"Current draw: {round(1000 * v_out / (R1 + R2), 1)} mA")
