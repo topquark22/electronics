@@ -19,7 +19,7 @@ if len(sys.argv) < 2 or len(sys.argv) > 3:
 v_target = float(sys.argv[1])
 
 # assume metal-film resistor
-tolerance_pct = 1
+tolerance_pct = 5
 if len(sys.argv) == 3:
     tolerance_pct = float(sys.argv[2])
 
@@ -52,7 +52,6 @@ def proper_round(num, dec=0):
     if num[-1]>='5':
         return float(num[:-2-(not dec)] + str(int(num[-2-(not dec)])+1))
     return float(num[:-1])
-
 
 R1 = round(closest_pair[0] * 100)
 R2 = round(closest_pair[1] * 100)
