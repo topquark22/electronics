@@ -57,10 +57,7 @@ def proper_round(num, dec=0):
 R1 = round(closest_pair[0] * 100)
 R2 = round(closest_pair[1] * 100)
 
-if tolerance_pct <= 1:
-    v_out = proper_round(closest_value, 1)
-else:
-  v_out = proper_round(closest_value)
+v_out = proper_round(closest_value, 1)
 
 v_in_max = round(v_out + v_max_diff);
 
