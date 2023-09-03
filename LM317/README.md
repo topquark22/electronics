@@ -19,6 +19,8 @@ The output voltage is given by the formula: **V_out = 1.25 * (1 + R2 / R1)**
 
 The minimum value of R1 is 120 ohms. A typical value found in many examples is 240 ohms.
 
+Note that R1 and R2 form a voltage divider that draws **V_out/(R1 + R2)** amperes, so you don't want them to be too small.
+
 V_in must be at least 3 volts greater than V_out. There is no maximum input voltage; however, the difference between the input and output voltage must not exceed 40V. (There is a high-voltage version, the LM317HV, which allows a differential of up to 60V.)
 
 ## Script usage
