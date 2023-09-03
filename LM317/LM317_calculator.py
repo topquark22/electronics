@@ -9,6 +9,7 @@
 # Author: topquark22
 
 import sys
+import resistor as rs
 
 if (2 != len(sys.argv)) :
     print(f"Usage: {sys.argv[0]} [target voltage]")
@@ -41,7 +42,7 @@ R1 = round(closest_pair[0] * 100)
 R2 = round(closest_pair[1] * 100)
 
 print(f"Target voltage: {v_target}")
-print(f"Best resistor values: R1={R1}, R2={R2}")
+print(f"Best resistor values: R1={rs.res_format(R1)}, R2={rs.res_format(R2)}")
 print(f"Expected voltage: {round(closest_value, 2)}")
 
 if R1 < 120:
