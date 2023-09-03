@@ -19,7 +19,7 @@ if len(sys.argv) < 2 or len(sys.argv) > 3:
 v_target = float(sys.argv[1])
 
 # assume metal-film resistor
-tolerance_pct = 5
+tolerance_pct = 1
 if len(sys.argv) == 3:
     tolerance_pct = float(sys.argv[2])
 
