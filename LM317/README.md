@@ -3,7 +3,7 @@
 
 ## Overview
 
-Trimpots are a pain, and take up 3 rows on your breadboard. Wouldn't it be nice to use fixed resistors instead? This script lets you do exactly that!
+Trimpots are a pain, expensive, and take up 3 rows on your breadboard. Wouldn't it be nice to use fixed resistors instead? This script lets you do exactly that!
 
 ### LM317
 
