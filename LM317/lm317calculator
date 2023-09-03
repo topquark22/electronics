@@ -46,17 +46,10 @@ for R1 in E12_ext:
             closest_value = v
             closest_pair = (R1, R2)
 
-# from https://stackoverflow.com/questions/31818050/round-number-to-nearest-integer
-def proper_round(num, dec=0):
-    num = str(num)[:str(num).index('.')+dec+2]
-    if num[-1]>='5':
-        return float(num[:-2-(not dec)] + str(int(num[-2-(not dec)])+1))
-    return float(num[:-1])
-
 R1 = round(closest_pair[0] * 100)
 R2 = round(closest_pair[1] * 100)
 
-v_out = proper_round(closest_value, 1)
+v_out = round(closest_value, 1)
 
 v_in_max = v_out + v_max_diff;
 
