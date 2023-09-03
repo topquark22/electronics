@@ -8,7 +8,7 @@ The LM317 is a versatile adjustable voltage regulator.
 
 In its most basic configuration as a voltage regulator, the LM317 is wired like this:
 
-![LM317 simple voltage regulator](LM317-basic.jpg)
+![LM317 simple voltage regulator](LM317-vreg-circuit.jpg)
 
 The output voltage is given by the formula: **V_out = 1.25 * (1 + R2 / R1)**
 
