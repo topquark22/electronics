@@ -8,13 +8,12 @@ const PROGMEM uint8_t PIN_STATUS = 2;
 const PROGMEM uint8_t PIN_PWM_IN = A7;
 
 const PROGMEM int BAUD_RATE = 9600;
-// LCD I2C address and size
 
+// LCD I2C address and size
 const PROGMEM uint8_t LCD_I2C_ADDR = 0x27;
 const PROGMEM uint8_t LCD_WIDTH = 16;
 const PROGMEM uint8_t LCD_HEIGHT = 2;
 LiquidCrystal_I2C lcd(LCD_I2C_ADDR, LCD_WIDTH, LCD_HEIGHT);
-
 
 void setup() {
   pinMode(PIN_OUT, OUTPUT);
@@ -37,7 +36,7 @@ const float VIN = 5.0;     // Pulse voltage (typically 5V)
 
 unsigned long pulseWidthForVoltage(float Vout) {
   if (Vout <= 0.0) return 0;
-  if (Vout >= VIN) return 10000000UL;  // arbitrary cap: 10 seconds
+  if (Vout >= VIN) return 25000UL;  //  5  R * C
 
   float tau = R * C;
   float t_sec = -tau * log(1.0 - Vout / VIN);  // seconds
@@ -61,6 +60,5 @@ void loop() {
   digitalWrite(PIN_OUT, LOW);
   delay(500);
   digitalWrite(PIN_OUT_Z, HIGH);
-  delay(500);
   digitalWrite(PIN_OUT_Z, LOW);
 }
