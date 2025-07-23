@@ -53,19 +53,24 @@ uint32_t voltageToPulseWidth(float Vout) {
 float prevVout = -1;  // global or static
 
 void loop() {
-  float vOut = analogRead(PIN_PWM_IN) * Vdd / 1023.0;
+  float desiredVoltage = analogRead(PIN_PWM_IN) * Vdd / 1023.0;
 
-  if (abs(vOut - prevVout) > 0.01) {  // only update if changed ≥ 10 mV
+  // Compensate for diode drop
+  float vOut = desiredVoltage + Vdiode;
+
+  // Limit to max
+  if (vOut > Vdd) vOut = Vdd;
+
+  if (abs(vOut - prevVout) > 0.01) {
     prevVout = vOut;
 
     uint32_t pulseWidth = voltageToPulseWidth(vOut);
 
-    // Reset
+    // Reset and pulse
     digitalWrite(PIN_OUT_Z, HIGH);
-    delayMicroseconds(100);
+    delayMicroseconds(10);
     digitalWrite(PIN_OUT_Z, LOW);
 
-    // Pulse
     if (pulseWidth > 0) {
       digitalWrite(PIN_OUT, HIGH);
       if (pulseWidth >= 1000) delay(pulseWidth / 1000);
@@ -73,14 +78,14 @@ void loop() {
       digitalWrite(PIN_OUT, LOW);
     }
 
-    // LCD update
+    // Display the *true* output voltage, not adjusted one
     lcd.clear();
     lcd.print("V=");
-    lcd.print(vOut);
+    lcd.print(desiredVoltage);  // not vOut
     lcd.setCursor(0, 1);
     lcd.print("t=");
     lcd.print(pulseWidth);
   }
 
-  delay(50);  // faster refresh
+  delay(50);
 }
