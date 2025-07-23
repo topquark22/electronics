@@ -30,35 +30,57 @@ void setup() {
 }
 
 // Constants (set these based on your hardware)
-const float C = 1e-6;      // Capacitance in Farads (e.g., 1 µF)
-const float R = 10000.0;    // Resistance in Ohms (e.g., 10kΩ)
-const float VIN = 5.0;     // Pulse voltage (typically 5V)
+const PROGMEM float C = 1e-6;         // Capacitance in Farads (e.g., 1 µF)
+const PROGMEM float R = 10000.0;       // Resistance in Ohms (e.g., 10kΩ)
+const PROGMEM float Vdiode = 0.6; // adjust for diode drop voltage
+const PROGMEM float Vdd = 5.0;
 
-unsigned long pulseWidthForVoltage(float Vout) {
-  if (Vout <= 0.0) return 0;
-  if (Vout >= VIN) return 25000UL;  //  5  R * C
+// pulse width for desired output voltage (microseconds)
+uint32_t voltageToPulseWidth(float Vout) {
+  const float tau = R * C;
+  const float t_max = 5.0 * tau;  // cap at 5RC
+  const float Vmax = Vdd - Vdiode;
 
-  float tau = R * C;
-  float t_sec = -tau * log(1.0 - Vout / VIN);  // seconds
-  unsigned long t_us = (unsigned long)(t_sec * 1e6);  // convert to microseconds
-  return t_us;
+  if (Vout <= Vdiode + 0.01) return 0; // below diode drop → skip
+  if (Vout >= Vdd) return (uint32_t)(t_max * 1E6); // cap max width
+
+  float t = -tau * log(1.0 - (Vout - Vdiode) / Vmax);
+  if (t > t_max) t = t_max;
+
+  return (uint32_t)(t * 1E6);  // in microseconds
 }
 
-// get pulse width  in
-void setOutput(int val) {
-  analogWrite(PIN_OUT, val);
-  digitalWrite(PIN_OUT_Z, 0 == val); // force output to 0V if val is 0
-}
+float prevVout = -1;  // global or static
 
 void loop() {
-  float vOut = analogRead(PIN_PWM_IN) * VIN / 1023;
-  lcd.clear();
-  lcd.print(vOut);
-  unsigned long pulseWidth = pulseWidthForVoltage(vOut);
-  digitalWrite(PIN_OUT, HIGH);
-  delayMicroseconds(pulseWidth);
-  digitalWrite(PIN_OUT, LOW);
-  delay(500);
-  digitalWrite(PIN_OUT_Z, HIGH);
-  digitalWrite(PIN_OUT_Z, LOW);
+  float vOut = analogRead(PIN_PWM_IN) * Vdd / 1023.0;
+
+  if (abs(vOut - prevVout) > 0.01) {  // only update if changed ≥ 10 mV
+    prevVout = vOut;
+
+    uint32_t pulseWidth = voltageToPulseWidth(vOut);
+
+    // Reset
+    digitalWrite(PIN_OUT_Z, HIGH);
+    delayMicroseconds(100);
+    digitalWrite(PIN_OUT_Z, LOW);
+
+    // Pulse
+    if (pulseWidth > 0) {
+      digitalWrite(PIN_OUT, HIGH);
+      if (pulseWidth >= 1000) delay(pulseWidth / 1000);
+      delayMicroseconds(pulseWidth % 1000);
+      digitalWrite(PIN_OUT, LOW);
+    }
+
+    // LCD update
+    lcd.clear();
+    lcd.print("V=");
+    lcd.print(vOut);
+    lcd.setCursor(0, 1);
+    lcd.print("t=");
+    lcd.print(pulseWidth);
+  }
+
+  delay(50);  // faster refresh
 }
