@@ -4,7 +4,8 @@
 // Each burst of edges within ~30 ms is treated as one "event".
 // If that event has multiple edges, we call it bounce.
 
-const byte SWITCH_PIN = 6;
+const uint8_t PIN_BUTTON = 2;
+const uint8_t PIN_LED = LED_BUILTIN;
 
 volatile bool eventActive = false;
 volatile unsigned int edgeCount = 0;
@@ -14,6 +15,9 @@ volatile unsigned long lastEdgeTime = 0;
 const unsigned long QUIET_TIME_US = 30000UL; // 30 ms of silence ends an event
 
 void switchISR() {
+
+  digitalWrite(PIN_LED, digitalRead(PIN_BUTTON)); // DEBUG
+
   unsigned long now = micros();
 
   if (!eventActive) {
@@ -31,16 +35,24 @@ void setup() {
   Serial.begin(9600);
   while (!Serial) { } // optional on Nano, but harmless
 
-  pinMode(SWITCH_PIN, INPUT_PULLUP);
+  pinMode(PIN_BUTTON, INPUT); // external pullup
+  pinMode(PIN_LED, OUTPUT);
 
-  attachInterrupt(digitalPinToInterrupt(SWITCH_PIN), switchISR, CHANGE);
+  digitalWrite(PIN_LED, digitalRead(PIN_BUTTON));
+
+  attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), switchISR, CHANGE);
 
   Serial.println(F("Switch bounce monitor ready."));
   Serial.println(F("Press and release the button a few times."));
   Serial.println(F("Each event within ~30 ms will be summarized.\n"));
+
+  interrupts();
 }
 
 void loop() {
+
+//  digitalWrite(PIN_LED, digitalRead(PIN_BUTTON));
+  
   static bool lastEventActive = false;
 
   // Take a snapshot of volatile variables safely
@@ -74,10 +86,13 @@ void loop() {
     Serial.print(duration / 1000.0, 2);
     Serial.println(F(" ms)"));
 
-    if (edges <= 2) {
+    if (edges <= 1) {
       Serial.println(F("→ Looks clean (no obvious bounce)."));
     } else {
-      Serial.println(F("→ Bounce detected! Multiple edges in one event."));
+      Serial.print(F("→ Bounce detected! "));
+      Serial.print(edges);
+      Serial.print(F(" edges in one transition to "));
+      Serial.println(active ? F("HIGH") : F("LOW"));
     }
 
     Serial.println();
