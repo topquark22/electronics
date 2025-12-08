@@ -29,6 +29,6 @@ This implements a full debounce on both the leading and trailing edges of the sw
 
 ## Notes
 
-1. Arduino ATmega digital inputs all have Schmitt-triggers. If this is for another general-purpose circuit, then use a Schmitt-trigger buffer or buffer inverter such as the 74HC14 or 
-2. We are using pinMode INPUT, not INPUT_PULLUP, as the pullup resistor is now external.
+1. Arduino ATmega digital inputs all have Schmitt-triggers. If this is for another general-purpose circuit, then use a Schmitt-trigger buffer or buffer inverter such as the 74HC14 or 40106.
+2. We are using pinMode(INPUT), not INPUT_PULLUP, because the pullup resistor is now external.
 3. The debounce will work for any digital input pin. But, our test code must use a pin capable of triggering IRQ, which restricts us to D2 or D3 for the test code itself.
