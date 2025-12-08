@@ -21,11 +21,13 @@ This implements a full debounce on both the leading and trailing edges of the sw
                       |
                       +----→ D2 (INPUT)
                       |
-                     C = 220 nF
+                     C = 330 nF
                       |
                      GND
 
 ```
+
+We started with the capacitor C = 100 nF. But we still got some bounces. We increased it gradually, to 150, 220 and now 330 nF. It is an experimental, incremental exercise.
 
 ## Notes
 
