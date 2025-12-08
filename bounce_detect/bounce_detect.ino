@@ -6,6 +6,7 @@
 
 const uint8_t PIN_BUTTON = 2;
 const uint8_t PIN_LED = LED_BUILTIN;
+const uint8_t PIN_BUZZER = 3;
 
 volatile bool eventActive = false;
 volatile unsigned int edgeCount = 0;
@@ -31,14 +32,22 @@ void switchISR() {
   }
 }
 
+void beep() {
+  digitalWrite(PIN_BUZZER, HIGH);
+  delay(50);
+  digitalWrite(PIN_BUZZER, LOW);
+}
+
 void setup() {
   Serial.begin(9600);
   while (!Serial) { } // optional on Nano, but harmless
 
   pinMode(PIN_BUTTON, INPUT); // external pullup
   pinMode(PIN_LED, OUTPUT);
+  pinMode(PIN_BUZZER, OUTPUT);
 
   digitalWrite(PIN_LED, digitalRead(PIN_BUTTON));
+  digitalWrite(PIN_BUZZER, LOW);
 
   attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), switchISR, CHANGE);
 
@@ -93,6 +102,7 @@ void loop() {
       Serial.print(edges);
       Serial.print(F(" edges in one transition to "));
       Serial.println(active ? F("HIGH") : F("LOW"));
+      beep();
     }
 
     Serial.println();
